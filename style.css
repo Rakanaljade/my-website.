@@ -1,0 +1,55 @@
+body {
+    background: linear-gradient(to bottom, #1e3c72, #2a5298); /* تدرج لوني من الأزرق الغامق إلى الأزرق الفاتح */
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    text-align: right;
+}
+
+h1 {
+    color: #ffffff; /* لون النص أبيض ليتناسب مع الخلفية */
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="file"] {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+input[type="submit"] {
+    background-color: #004080;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #003366;
+}
+
+img, video {
+    margin-top: 10px;
+}
+
+button {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #cc0000;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #ffffff; /* لون النص أبيض ليتناسب مع الخلفية */
+}

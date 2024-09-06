@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع الواجبات الصفية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+    var password = prompt("أدخل كلمة المرور:");
+    if (password !== "688") {
+        document.body.innerHTML = "<h1>كلمة المرور غير صحيحة</h1>";
+    } else {
+        document.body.innerHTML = `
+            <h1>مرحبًا بكم في موقع الواجبات الصفية</h1>
+            <p>هنا يمكنكم نشر الواجبات من خلال تحميل الصور والفيديوهات، وعرضها مباشرة.</p>
+            <h2>أضف الواجب هنا:</h2>
+            <form id="uploadForm">
+                <label for="name">اسم الطالب:</label>
+                <input type="text" id="name" name="name"><br><br>
+
+                <label for="title">عنوان الواجب:</label>
+                <input type="text" id="title" name="title"><br><br>
+
+                <label for="file">اختر صورة أو فيديو:</label>
+                <input type="file" id="file" name="file" accept="image/,video/"><br><br>
+
+                <input type="submit" value="إرسال">
+            </form>
+
+            <h2>الواجبات المنشورة:</h2>
+            <ul id="homeworkList">
+                <!-- ستضاف الواجبات هنا -->
+            </ul>
+
+            <footer>
+                <p>هذا الموقع من صنع راكان الجدي لمدرسة عمر بن الخطاب شعبة الوسائط الإبداعية قصبة عمان</p>
+            </footer>
+        `;
+    }
+</script>
+
+<!-- الشيفرة لجمع البيانات وعرض الواجبات -->
+<script>
+    const form = document.getElementById('uploadForm');
+    const homeworkList = document.getElementById('homeworkList');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const title = document.getElementById('title').value;
+        const file = document.getElementById('file').files[0];
+
+        if (!name || !title || !file) {
+            alert("الرجاء ملء جميع الحقول");
+            return;
+        }
+
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<strong>الطالب:</strong> ${name}<br>
+                              <strong>عنوان الواجب:</strong> ${title}<br>`;
+
+        if (file.type.startsWith('image/')) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.alt = title;
+            img.width = 320;
+            listItem.appendChild(img);
+        } else if (file.type.startsWith('video/')) {
+            const video = document.createElement('video');
+            video.src = URL.createObjectURL(file);
+            video.controls = true;
+            video.width = 320;
+            listItem.appendChild(video);
+        }
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'حذف';
+        deleteButton.addEventListener('click', function() {
+            homeworkList.removeChild(listItem);
+        });
+        listItem.appendChild(deleteButton);
+
+        homeworkList.appendChild(listItem);
+    });
+</script>
+
+</body>
+</html>
